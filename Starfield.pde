@@ -1,29 +1,32 @@
 Particle[] arr = new Particle[370]; 
 int particleL = 360; 
 double angleD = 1.0/particleL; 
+boolean mode = true; 
 
 void setup() { 
   background(255); 
   size(400, 400); 
   noStroke(); 
-  for(int i = 0; i < particleL; i++) { 
-    double angle = (double)i/particleL; 
-    arr[i] = new Particle(angle); 
-  } 
-  for(int i = particleL; i < arr.length; i++) {
+  for(int i = 0; i < particleL; i++) 
+    arr[i] = new Particle((double)i/particleL); 
+  for(int i = particleL; i < arr.length; i++) 
     arr[i] = new OddBallParticle(); 
-  } 
 } 
 
 void draw() { 
-  for(int i = 0; i < particleL; i++) { 
+  if (!mode) 
+    background(255); 
+  for(int i = 0; i < arr.length; i++) { 
     arr[i].move(); 
     arr[i].show(); 
-  } 
-  for(int i = particleL; i < arr.length; i++) {
-    arr[i].show(); 
-  } 
-  
+  }   
+} 
+
+void mousePressed() {
+  if (mode) 
+    mode = false; 
+  else 
+    mode = true; 
 } 
 
 class Particle { 
@@ -74,6 +77,11 @@ class OddBallParticle extends Particle {
     myY = Math.random()*400; 
     a = og = ogint = s = sp = 0; 
     c = color(237, 235, 105); 
+  } 
+  
+  void move() {
+    myX = myX + (int)(Math.random()*3)-1; 
+    myY = myY + (int)(Math.random()*3)-1; 
   } 
   
   void show() { 
