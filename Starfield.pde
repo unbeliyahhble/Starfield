@@ -14,7 +14,7 @@ void setup() {
 } 
 
 void draw() { 
-  if (!mode) 
+  if(!mode) 
     background(255); 
   for(int i = 0; i < arr.length; i++) { 
     arr[i].move(); 
@@ -23,7 +23,7 @@ void draw() {
 } 
 
 void mousePressed() {
-  if (mode) 
+  if(mode) 
     mode = false; 
   else 
     mode = true; 
@@ -53,9 +53,8 @@ class Particle {
     myX += Math.cos(a)*sp; 
     myY += Math.sin(a)*sp; 
     a += angleD*(TWO_PI); 
-    if(((int)a - 7) == ogint) { 
+    if(((int)a - 7) == ogint) 
       a = og; 
-    } 
     if(myX > 400 || myX < 0 || myY > 400 || myY < 0) {
       myX = 200; 
       myY = 200; 
